@@ -1,0 +1,129 @@
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-7">
+                <div class="card">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h1 class="panel-title">Liste des candidats</h1>
+                                </div>
+                        </div>
+                        <div class="content">
+                                <table class="table table-striped thead-light">
+                                        <thead >
+                                            <tr>
+                                                <th *ngFor="let row of dataTableCandidat.headerRow">{{row}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let u of listCandidat">
+                                                <td>{{u.nom}}</td>
+                                                <td>{{u.prenom}}</td>
+                                                <td><i *ngIf="u.visiteMedical"  class="fa fa-check"></i></td>
+                                                <td>en cours</td>
+                                                <td> <a class="btn text-danger" (click)="showEdit(u)" (click)="show = true"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-6 col-md-5">
+                <div class="card">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h1 class="panel-title">Ajout des Candidats</h1>
+                                </div>
+                        </div>
+                    <div class="content">
+                        <div *ngIf="show" [@myanimation]>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label  for='vm'>Nom</label>
+                                        <input  type="text" #nom="ngModel"  [(ngModel)]="selectedConsultCandidat.nom"   placeholder="nom"  name="nom"  disabled class="form-control border-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label  >Prenom</label>
+                                            <input  type="text"  #nom="ngModel"  [(ngModel)]="selectedConsultCandidat.prenom" class="form-control border-input" disabled  name="prenom"   >
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label  for='vm'>Date d'enbauche</label>
+                                            <input  type="text" #dateEmbouche="ngModel"  [(ngModel)]="selectedConsultCandidat.dateEmbouche" disabled class="form-control border-input" name="VisiteMedicale"   >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label  >Date validité de carte de séjour</label>
+                                                <input  type="text" #dateValidCrtSejour="ngModel"  [(ngModel)]="selectedConsultCandidat.dateValidCrtSejour" class="form-control border-input" disabled  name="VisiteMedicale"   >
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label  >Poste occupé</label>
+                                            <input  type="text" #postOcupe="ngModel"  [(ngModel)]="selectedConsultCandidat.postOcupe" class="form-control border-input" disabled  name="VisiteMedicale"   >
+                                        </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                           
+                        <form class="cdt-form" #candidatConsultForm="ngForm" (ngSubmit)="onSubmit(candidatConsultForm)">
+                                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="selectedConsultCandidat.id">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Date entretien individuel</label>
+                                        <input type="date" #dateEntretienInd="ngModel" [disabled]="!selectedConsultCandidat.id"  [(ngModel)]="selectedConsultCandidat.dateEntretienInd" class="form-control border-input" name="dateEntretienInd"
+                                        placeholder="date entretien individuel" required autocomplete="off" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label  for='vm'>Visite Médicale</label>
+                                        <input id='vm' #visiteMedical="ngModel"  [disabled]="!selectedConsultCandidat.id"  [(ngModel)]="selectedConsultCandidat.visiteMedical" type="checkbox" class="custom-control-input" name="visiteMedical"   >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ei">entretien individuel</label>
+                                        <input id="ei" #entretienIndividuel="ngModel"  [disabled]="!selectedConsultCandidat.id" [(ngModel)]="selectedConsultCandidat.entretienIndividuel" type="checkbox"  name="entretienIndividuel" class="custom-control-input"  >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="cmt" >
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Commentaires</label>
+                                        <textarea rows="5" #commentaire="ngModel"  [disabled]="!selectedConsultCandidat.id"  [(ngModel)]="selectedConsultCandidat.commentaire" class="form-control border-input" placeholder="Commentaires" name="commentaire" >
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                    <div class="col-md-3">
+                                            <div class="form-group">
+                                                    <button type="button" (click)="show = false" [disabled]="!selectedConsultCandidat.id" class="btn btn-danger btn-fill"  (click)="resetForm(candidatConsultForm)">Initialser </button>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <button [disabled]="!selectedConsultCandidat.id"  class="btn btn-success btn-fill ">Valider</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   

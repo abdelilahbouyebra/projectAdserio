@@ -1,0 +1,222 @@
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <div class="card">
+                 <a onMouseOver="this.style.color='#0F0' " onMouseOut="this.style.color='#00F'" (click)="afficheDetailCrtSjr=false;afficheEntreIndivid=false;affichePerEssai=true">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-danger text-center">
+                                    <i class="ti-timer"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="numbers">
+                                    <p>Période d'Essai</p>
+                                    <div class="numbers" >{{countPeriodEssai?.length}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr />
+                            <div class="stats">
+                                    <i class="ti-timer"></i>Période d'essai(15j avant la date de validation)
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="card">
+                <a  onMouseOver="this.style.color='#0F0' " onMouseOut="this.style.color='#00F'" (click)="afficheDetailCrtSjr=true;afficheEntreIndivid=false;affichePerEssai=false">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-danger text-center">
+                                    <i class="ti-wallet"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="numbers">
+                                    <p>Carte de Séjour</p>
+                                    <div class="numbers" >{{countCartSej?.length}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr />
+                            <div class="stats">
+                                    <i class="ti-timer"></i>Carte Séjour(2 mois avant la date fin) 
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="card">
+                <a   onMouseOver="this.style.color='#0F0' " onMouseOut="this.style.color='#00F'" (click)="afficheDetailCrtSjr=false;afficheEntreIndivid=true;affichePerEssai=false">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-danger text-center">
+                                    <i class="ti-check"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="numbers">
+                                    <p>Entretien Individuel</p>
+                                    <div class="numbers" >{{countEntAnnuel?.length}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <hr />
+                            <div class="stats">
+                                <i class="ti-timer"></i>Entretien Individuel(3 mois avant la date d'entretien) 
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Email Statistics</h4>
+                        <p class="category">Last Campaign Performance</p>
+                    </div>
+                    <div class="content">
+                        <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+
+                        <div class="footer">
+                            <div class="chart-legend">
+                                <i class="fa fa-circle text-info"></i> Open
+                                <i class="fa fa-circle text-danger"></i> Bounce
+                                <i class="fa fa-circle text-warning"></i> Unsubscribe
+                            </div>
+                            <hr>
+                            <div class="stats">
+                                <i class="ti-timer"></i> Campaign sent 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <div class="col-md-6">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Email Statistics</h4>
+                                    <p class="category">Last Campaign Performance</p>
+                                </div>
+                                <div class="content">
+                                    <div id="chartPreferences2" class="ct-chart ct-perfect-fourth"></div>
+            
+                                    <div class="footer">
+                                        <div class="chart-legend">
+                                            <i class="fa fa-circle text-info"></i> Open
+                                            <i class="fa fa-circle text-danger"></i> Bounce
+                                            <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                        </div>
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="ti-timer"></i> Campaign sent 2 days ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            </div> 
+        </div> -->
+    </div>
+            <div class="col-lg-12 col-md-5"  [hidden]="!affichePerEssai">
+                <div class="card">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h1 class="panel-title">Détails des candidats</h1>
+                                </div>
+                        </div>
+                        <div class="content">
+                                <table class="table table-striped thead-light">
+                                        <thead >
+                                            <tr>
+                                                <th >NOM</th><th >PRENOM</th><th >DATE EMBAUCHE</th><th >DATE VALIDE CARTE SEJ</th>
+                                                <th >DATE ENTR</th><th >commentaire</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let c of countPeriodEssai">
+                                                <td>{{c.nom}}</td>
+                                                <td>{{c.prenom}}</td>
+                                                <td>{{c.dateEmbouche}}</td>
+                                                <td>{{c.dateValidCrtSejour}}</td>
+                                                <td>{{c.dateEntretienInd}}</td>
+                                                <td>{{c.commentaire}}</td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-12 col-md-5" [hidden]="!afficheDetailCrtSjr">
+                <div class="card">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h1 class="panel-title">Détails des candidats</h1>
+                                </div>
+                        </div>
+                        <div class="content">
+                                <table class="table table-striped thead-light">
+                                        <thead >
+                                            <tr>
+                                                    <th >NOM</th><th >PRENOM</th><th >DATE EMBAUCHE</th><th >DATE VALIDE CARTE SEJ</th>
+                                                    <th >DATE ENTR</th><th >commentaire</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let c of countCartSej">
+                                                    <td>{{c.nom}}</td>
+                                                    <td>{{c.prenom}}</td>
+                                                    <td>{{c.dateEmbouche}}</td>
+                                                    <td>{{c.dateValidCrtSejour}}</td>
+                                                    <td>{{c.dateEntretienInd}}</td>
+                                                    <td>{{c.commentaire}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-12 col-md-5"  [hidden]="!afficheEntreIndivid">
+                <div class="card">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h1 class="panel-title">Détails des candidats</h1>
+                                </div>
+                        </div>
+                        <div class="content">
+                                <table class="table table-striped thead-light">
+                                        <thead >
+                                            <tr>
+                                                    <th >NOM</th><th >PRENOM</th><th >DATE EMBAUCHE</th><th >DATE VALIDE CARTE SEJ</th>
+                                                    <th >DATE ENTR</th><th >commentaire</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let c of countEntAnnuel">
+                                                    <td>{{c.nom}}</td>
+                                                    <td>{{c.prenom}}</td>
+                                                    <td>{{c.dateEmbouche}}</td>
+                                                    <td>{{c.dateValidCrtSejour}}</td>
+                                                    <td>{{c.dateEntretienInd}}</td>
+                                                    <td>{{c.commentaire}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                        </div>
+                    </div>
+            </div>
