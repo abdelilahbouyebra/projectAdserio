@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from '../services/notification.service';
 import { Candidat } from '../models/candidat';
 
@@ -9,6 +9,8 @@ import { Candidat } from '../models/candidat';
 })
 export class NotificationComponent implements OnInit {
   listCandidtatVerifDatEmb:Candidat[];
+  
+  @Input() eNom:String;
 
   constructor(private notificationService:NotificationService) { }
 
