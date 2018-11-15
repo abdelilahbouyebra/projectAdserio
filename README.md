@@ -1,8 +1,8 @@
 # Gestion des Candidats Angular4,Nodejs et mysql
 
-#instalation
+#instalation:
 npm install
-#demarer le serveur nodejs
+#demarer le serveur:
 node serve
-#demarer le le serveur angular
+#demarer le le serveur angular:
 ng serve
