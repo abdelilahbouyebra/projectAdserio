@@ -1,0 +1,45 @@
+<div class="col-lg-2 col-md-4"></div>
+<div class="col-lg-8 col-md-7">
+    <div class="card">
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h1 class="panel-title">Gestion des Candidats</h1>
+                    </div>
+            </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 mt-3 mx-auto"></div>
+          <div class="col-md-6 mt-3 mx-auto">
+            <form (submit)="register()" #utilisateurForm="ngForm">
+              <h1 class="h3 mb-3 font-weight-normal">Nouveau utilisateur</h1>
+              <div class="form-group">
+                <label for="name">First name</label>
+                <input type="text" class="form-control" #first_name="ngModel" name="first_name" required placeholder="Entrer le nom" [(ngModel)]="selectedUtilisateur.first_name">
+                <div class="alert alert-danger" *ngIf="first_name.invalid && first_name.touched">le nom est obligatoire</div>
+              </div>
+              <div class="form-group">
+                <label for="name">Last name</label>
+                <input type="text" class="form-control" #last_name="ngModel" required name="last_name" placeholder="Entrer le prenom" [(ngModel)]="selectedUtilisateur.last_name">
+                <div class="alert alert-danger" *ngIf="last_name.invalid && last_name.touched">le nom est obligatoire</div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control"  #email="ngModel" required name="email" placeholder="Entrer email" [(ngModel)]="selectedUtilisateur.email">
+                <div class="alert alert-danger" *ngIf="email.invalid && email.touched">email est obligatoire</div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" #password="ngModel" required name="password" placeholder="Password" [(ngModel)]="selectedUtilisateur.password">
+                <div class="alert alert-danger" *ngIf="password.invalid && password.touched">password est obligatoire</div>
+              </div>
+
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <button  [disabled]="!utilisateurForm.valid" class="btn btn-success btn-fill btn-block">Enregistrer utilisateur</button>
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>
+  </div>
+</div>

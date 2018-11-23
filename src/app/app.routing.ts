@@ -4,12 +4,14 @@ import { UserComponent }   from './user/user.component';
 import { ConsultComponent }   from './consultation/consultation.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth.guard'
+import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
+import { ProfileComponent } from './utilisateurs/profile/profile.component';
 
 
 export const AppRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'acceuil',
         pathMatch: 'full',
     },
     {
@@ -29,6 +31,16 @@ export const AppRoutes: Routes = [
     {
         path: 'consultation',
         component: ConsultComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'utilisateurs',
+        component: UtilisateursComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent,
         canActivate: [AuthGuard]
     }
 ]

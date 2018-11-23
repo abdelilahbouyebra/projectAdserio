@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer, ViewChild, ElementRef } from '@angular/core';
-import { ROUTES } from '../../sidebar/sidebar.component';
+import { ROUTES, RouteInfo } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
@@ -7,6 +7,9 @@ import { Candidat } from '../../models/candidat';
 import { NotificationComponent } from '../../notification/notification.component';
 import { LoginService } from 'app/services/login.service';
 
+export const ROUTE: RouteInfo[] = [
+    { path: 'utilisateurs', title: 'Ajouter utilisateur',  icon: 'ti-settings', class: ''}
+  ]
 @Component({
     moduleId: module.id,
     selector: 'navbar-cmp',
@@ -20,6 +23,9 @@ export class NavbarComponent implements OnInit{
     private toggleButton;
     private sidebarVisible: boolean;
     listCandidtatVerifDatEmb:Candidat[];
+    public menuItems: any[];
+    public linkProfil = "profil";
+
 
     @ViewChild("navbar-cmp") button;
 
@@ -34,7 +40,8 @@ export class NavbarComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.listTitles = ROUTES.filter(listTitle => listTitle);
+        this.menuItems = ROUTE.filter(menuItem => menuItem);
+        this.listTitles = ROUTE.filter(listTitle => listTitle);
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         this.getVerifierDateEmbouche();

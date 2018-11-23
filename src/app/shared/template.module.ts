@@ -8,10 +8,9 @@ import { DashboardComponent }   from '../dashboard/dashboard.component';
     CommonModule
   ],
   declarations: [    
-    NavbarComponent,
     DashboardComponent
   ],
   
-  exports:[NavbarComponent]
+  exports:[]
 })
 export class TemplateModule { }

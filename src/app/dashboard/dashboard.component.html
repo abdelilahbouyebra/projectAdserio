@@ -6,7 +6,7 @@
                     <div class="content">
                         <div class="row">
                             <div class="col-xs-5">
-                                <div class="icon-big icon-danger text-center">
+                                <div class="icon-big icon-success text-center">
                                     <i class="ti-timer"></i>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                     <div class="content">
                         <div class="row">
                             <div class="col-xs-5">
-                                <div class="icon-big icon-danger text-center">
+                                <div class="icon-big icon-warning text-center">
                                     <i class="ti-check"></i>
                                 </div>
                             </div>
@@ -85,34 +85,14 @@
     </div>
             <div class="col-lg-12 col-md-5"  [hidden]="!affichePerEssai">
                 <div class="card">
-                        <div class="panel panel-default">
-                                <div class="panel-heading">
-                                  <h1 class="panel-title">Détails des candidats</h1>
-                                </div>
-                        </div>
                         <div class="content">
-                                <table class="table table-striped thead-light">
-                                        <thead >
-                                            <tr>
-                                                <th >NOM</th><th >PRENOM</th><th >DATE EMBAUCHE</th><th >DATE VALIDE CARTE SEJ</th>
-                                                <th >DATE ENTR</th><th >commentaire</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let c of countPeriodEssai">
-                                                <td>{{c.nom}}</td>
-                                                <td>{{c.prenom}}</td>
-                                                <td>{{c.dateEmbouche}}</td>
-                                                <td>{{c.dateValidCrtSejour}}</td>
-                                                <td>{{c.dateEntretienInd}}</td>
-                                                <td>{{c.commentaire}}</td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="alert alert-success" role="alert" *ngFor="let c of countPeriodEssai" >
+                                            <div><b>Mr {{c.nom}} {{c.prenom}}!</b> Date d'ambouche est le {{c.dateEmbouche}}, la période d'esai sera terminer le {{c.dateEmbouche}}  . <span style="text-align: right;"><button class="btn btn-success rie">ok j'ai compris</button></span></div>
+                                    </div>
                         </div>
                     </div>
-            </div>
+              </div>
+      
             <div class="col-lg-12 col-md-5" [hidden]="!afficheDetailCrtSjr">
                 <div class="card">
                         <div class="panel panel-default">
@@ -121,24 +101,11 @@
                                 </div>
                         </div>
                         <div class="content">
-                                <table class="table table-striped thead-light">
-                                        <thead >
-                                            <tr>
-                                                    <th >NOM</th><th >PRENOM</th><th >DATE EMBAUCHE</th><th >DATE VALIDE CARTE SEJ</th>
-                                                    <th >DATE ENTR</th><th >commentaire</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let c of countCartSej">
-                                                    <td>{{c.nom}}</td>
-                                                    <td>{{c.prenom}}</td>
-                                                    <td>{{c.dateEmbouche}}</td>
-                                                    <td>{{c.dateValidCrtSejour}}</td>
-                                                    <td>{{c.dateEntretienInd}}</td>
-                                                    <td>{{c.commentaire}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="alert alert-danger" role="alert" *ngFor="let c of countCartSej" >
+                                        <h4 class="alert-heading">Mr {{c.nom}} {{c.prenom}}!</h4>
+                                        <p>Date d'ambouche le {{c.dateEmbouche}}, you successfully read this important alert message..</p>
+                                        <p class="mb-0"><button class="btn btn-danger rie">ok j'ai compris</button></p>
+                                </div>
                         </div>
                     </div>
             </div>
@@ -150,24 +117,11 @@
                                 </div>
                         </div>
                         <div class="content">
-                                <table class="table table-striped thead-light">
-                                        <thead >
-                                            <tr>
-                                                    <th >NOM</th><th >PRENOM</th><th >DATE EMBAUCHE</th><th >DATE VALIDE CARTE SEJ</th>
-                                                    <th >DATE ENTR</th><th >commentaire</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let c of countEntAnnuel">
-                                                    <td>{{c.nom}}</td>
-                                                    <td>{{c.prenom}}</td>
-                                                    <td>{{c.dateEmbouche}}</td>
-                                                    <td>{{c.dateValidCrtSejour}}</td>
-                                                    <td>{{c.dateEntretienInd}}</td>
-                                                    <td>{{c.commentaire}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="alert alert-warning" role="alert" *ngFor="let c of countEntAnnuel" >
+                                        <h4 class="alert-heading">Mr {{c.nom}} {{c.prenom}}!</h4>
+                                        <p>Date d'ambouche le {{c.dateEmbouche}}, you successfully read this important alert message.</p>
+                                        <p class="mb-0"><button class="btn btn-warning rie">ok j'ai compris</button></p>
+                                </div>
                         </div>
                     </div>
             </div>

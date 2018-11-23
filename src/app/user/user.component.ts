@@ -24,7 +24,6 @@ export class UserComponent implements OnInit{
 
     fileToUpload: File = null;
     imageUrl: string = "";
-
     constructor(
           private userService:UserService,
           private toastr:ToastrService,

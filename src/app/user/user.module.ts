@@ -7,6 +7,8 @@ import { NotificationComponent } from '../notification/notification.component';
 import { UserComponent }   from '../user/user.component';
 import { ConsultComponent }   from '../consultation/consultation.component';
 import {FormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination'; 
+
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import {FormsModule} from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers:[UserService,CandidatService,LoginService],
 

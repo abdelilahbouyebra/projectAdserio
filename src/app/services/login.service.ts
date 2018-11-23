@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { Utilisateurs } from 'app/models/utilisateurs';
 
 export interface UserDetails {
   id: number
@@ -31,7 +31,7 @@ export class LoginService {
     private token: string
 
   
-    baseUrl:String="http://localhost:8081/";
+  baseUrl:String="http://localhost:8081/users/";
   constructor(private http: HttpClient,private router: Router) { 
   	this.isUserLoggedIn = false;
   }
@@ -50,7 +50,7 @@ export class LoginService {
   	return this.isUserLoggedIn;
   }
   public login(user: TokenPayload): Observable<any> {
-    const base = this.http.post(this.baseUrl+'users/login', user)
+    const base = this.http.post(this.baseUrl+'login', user)
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
@@ -89,6 +89,16 @@ export class LoginService {
   public logout(): void {
     this.token = ''
     window.localStorage.removeItem('usertoken')
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl('login')
+  }
+  public register(user: Utilisateurs): Observable<any> {
+    return this.http.post(this.baseUrl+"register", user);
+  }
+  public profile(): Observable<any> {
+    const head = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+    })
+    return this.http.get(this.baseUrl+"profile",{headers:head})
   }
 }
