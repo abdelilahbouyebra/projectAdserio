@@ -67,7 +67,6 @@ export class UserComponent implements OnInit{
     
     onSubmit(form: NgForm) {
         console.log(form.value)
-        if (form.value.id == null) {
           this.userService.addCandidat(form.value)
             .subscribe(data => {
               this.resetForm(form);
@@ -75,15 +74,6 @@ export class UserComponent implements OnInit{
               this.getVerifierDateEmbouche();
               this.toastr.success('SUCCESS', "Candidat est Enregistré");
             })
-        }else {
-            this.userService.modifierCandidat(form.value.id, form.value)
-            .subscribe(data => {
-              this.resetForm(form);
-              this.getAllCandidat();
-              this.getVerifierDateEmbouche();
-              this.toastr.info('SUCCESS', "Candidat est Modifié");
-            })
-      }
       
     }
   getVerifierDateEmbouche(){

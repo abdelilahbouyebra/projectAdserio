@@ -18,16 +18,17 @@ export const AppRoutes: Routes = [
     },
     {
         path: 'acceuil',
-        //canActivate:[AuthGuard],
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'candidats',
-        //canActivate:[AuthGuard],
-        component: UserComponent
+        component: UserComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'consultation',
-        component: ConsultComponent
+        component: ConsultComponent,
+        canActivate: [AuthGuard]
     }
 ]

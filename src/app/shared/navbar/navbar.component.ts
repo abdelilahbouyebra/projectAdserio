@@ -5,6 +5,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { NotificationService } from '../../services/notification.service';
 import { Candidat } from '../../models/candidat';
 import { NotificationComponent } from '../../notification/notification.component';
+import { LoginService } from 'app/services/login.service';
 
 @Component({
     moduleId: module.id,
@@ -22,10 +23,14 @@ export class NavbarComponent implements OnInit{
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef,private notificationService:NotificationService) {
+    constructor(location:Location, private renderer : Renderer, 
+        private element : ElementRef,
+        private notificationService:NotificationService,
+        private auth:LoginService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+
     }
 
     ngOnInit(){

@@ -1,9 +1,14 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
+const users = express.Router();
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+process.env.SECRET_KEY = 'secret';
+
 var app = express();
 
-
+users.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ type: 'application/*+json' }))
 app.use(bodyParser.json())
@@ -44,7 +49,13 @@ app.post('/aaa', urlencodedParser, function (req, res) {
 var server = app.listen(8081, function () {
     console.log("listening at http://%s:%s")
 })
-
+var User= [{
+      id: null,
+      last_name: String,
+      email:String,
+      password: String
+    }]
+  
 //get All candidats
 app.get('/getAllCandidat',function (req,res) {
     mysqlConn.query('SELECT * from candidats  ORDER BY id DESC', function (error, results, fields) {
@@ -186,3 +197,24 @@ app.get("/dateEntrAnnuel",function(req,res){
         res.json(results);
     });
 })
+
+app.post('/login', (req, res) => {User.findOne({
+    where: {
+      email: req.body.email,
+      password: req.body.password
+    }
+  })
+    .then(user => {
+      if (user) {
+        let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+          expiresIn: 1440
+        })
+        res.json({ token: token })
+      } else {
+        res.send('User does not exist')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+  })

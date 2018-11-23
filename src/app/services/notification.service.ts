@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders,HttpErrorResponse,HttpClient} from '@angular/common/http';
-import { Observable} from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import { Observable, of } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { Candidat } from '../models/candidat';
 import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
 import { DatePipe } from '@angular/common';
@@ -11,45 +10,47 @@ import { DatePipe } from '@angular/common';
 @Injectable()
 export class NotificationService {
 
-  baseUrl:String="http://localhost:8081/";
+  baseUrl:String="http://localhost:8081/users/";
   users:Candidat[]=[];
 
   constructor(private http:Http) { }
 
   getVerifierDateEmbouche(): Observable<Candidat[]> {
-      return this.http
-          .get(this.baseUrl + 'verifDateValidEmb')
-          .map((response: Response) => {
-              return  <Candidat[]>response.json();
-          })
-          .catch(this.handleError);
-          
+   return this.http
+          .get(this.baseUrl + 'verifDateValidEmb').pipe(
+            map((response: Response) => {
+                return  <Candidat[]>response.json();
+            })
+          )
   }
   countPeriodEssai(): Observable<any> {
     return this.http
-        .get(this.baseUrl + 'countPerEssai')
-        .map((response: Response) => {
-            return  response.json();
-        })
-        .catch(this.handleError);
+        .get(this.baseUrl + 'countPerEssai').pipe(
+            map((response: Response) => {
+                return  response.json();
+            })
+        )
+       
         
 }
 countValiditeCarteSejour(): Observable<any> {
     return this.http
-        .get(this.baseUrl + 'countValCarteSej')
-        .map((response: Response) => {
-            return  response.json();
-        })
-        .catch(this.handleError);
+        .get(this.baseUrl + 'countValCarteSej').pipe(
+            map((response: Response) => {
+                return  response.json();
+            })
+        )
+
         
 }
 countDateEntAnnuel(): Observable<any> {
     return this.http
-        .get(this.baseUrl + 'dateEntrAnnuel')
-        .map((response: Response) => {
-            return  response.json();
-        })
-        .catch(this.handleError);
+        .get(this.baseUrl + 'dateEntrAnnuel/').pipe(
+           map((response: Response) => {
+                return  response.json();
+            })
+        )
+
         
 }
   private handleError(error: Response) {

@@ -16,6 +16,7 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 import { NguiMapModule} from '@ngui/map';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -35,7 +36,9 @@ import { NguiMapModule} from '@ngui/map';
     SidebarModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'}),
     NavbarModule,
-    FooterModule
+    FooterModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [NotificationService,AuthGuard],
   bootstrap: [AppComponent]

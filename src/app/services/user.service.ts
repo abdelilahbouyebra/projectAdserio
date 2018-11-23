@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders,HttpErrorResponse,HttpClient} from '@angular/common/http';
-import { Observable} from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs/Rx';
+import { map } from 'rxjs/operators';
 import { Candidat } from '../models/candidat';
 import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
 import { DatePipe } from '@angular/common';
@@ -11,7 +10,7 @@ import { DatePipe } from '@angular/common';
 @Injectable()
 export class UserService {
 
-  baseUrl:String="http://localhost:8081/";
+  baseUrl:String="http://localhost:8081/users/";
   usersList:Candidat[];
   users:Candidat[]=[];
 
@@ -19,11 +18,11 @@ export class UserService {
 
   getAllCandidats(): Observable<Candidat[]> {
       return this.http
-          .get(this.baseUrl + 'getAllCandidat')
-          .map((response: Response) => {
+          .get(this.baseUrl + 'getAllCandidat').pipe(
+            map((response: Response) => {
               return <Candidat[]>response.json();
           })
-          .catch(this.handleError);
+          )
   }
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
@@ -37,7 +36,7 @@ export class UserService {
     var headerOptions = new Headers({'content-type':'application/json'});
     var requestOptions = new RequestOptions({method : RequestMethod.Post,headers : headerOptions});
     return this.http
-          .post(this.baseUrl+"addCandidat",body,requestOptions).map(x => x.json());
+          .post(this.baseUrl+"addCandidat",body,requestOptions);
 }
 deleteCandidat(id: number) {
   return this.http.delete(this.baseUrl+"deleteCandidat/"+ id);
