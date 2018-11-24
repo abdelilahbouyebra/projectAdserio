@@ -60,6 +60,7 @@ export class ConsultComponent implements OnInit{
           entretienIndividuel:false,
           commentaire:'',
           calcDateEmb:0,
+          isPeriodEsaiValid:false,
       }
 }
     getAllCandidat(){

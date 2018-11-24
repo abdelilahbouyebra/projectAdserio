@@ -59,7 +59,8 @@ export class UserComponent implements OnInit{
           visiteMedical:false,
           entretienIndividuel:false,
           commentaire:'',
-          calcDateEmb:0
+          calcDateEmb:0,
+          isPeriodEsaiValid:false,
 
         }
       }

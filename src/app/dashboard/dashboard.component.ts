@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { NotificationService } from '../services/notification.service';
+import { UserService } from 'app/services/user.service';
+import { CandidatService } from 'app/services/candidat.service';
+import { Candidat } from 'app/models/candidat';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $:any;
 
@@ -11,7 +15,10 @@ declare var $:any;
 })
 
 export class DashboardComponent implements OnInit{
-  constructor(private notificationService:NotificationService){}
+  constructor(private notificationService:NotificationService,
+    private candidatService:CandidatService,
+    private toastr:ToastrService
+    ){}
   countPeriodEssai:any;
   countCartSej:any;
   countEntAnnuel:any;
@@ -60,4 +67,13 @@ export class DashboardComponent implements OnInit{
         //   series: [62, 32, 6]
         // });
     }
+    validerPeriodeEssai(candidat:Candidat){
+        candidat.isPeriodEsaiValid=true;
+        this.candidatService.validerPeriodeEssaiCandidat(candidat)
+        .subscribe(data => {
+            this.ngOnInit();
+          this.toastr.info('SUCCESS', "Candidat  est Modifié");
+        })
+}
+
 }

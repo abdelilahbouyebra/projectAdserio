@@ -37,4 +37,11 @@ modifierEtatCandidat(id, user) {
   return this.http.put(this.baseUrl+"modifEtatCandidat",body,requestOptions);
 
 }
+validerPeriodeEssaiCandidat(user) {
+  var body = JSON.stringify(user);
+  var headerOptions = new Headers({ 'Content-Type': 'application/json' });
+  var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
+  return this.http.put(this.baseUrl+"validerPeriodeEssai",body,requestOptions);
+
+}
 }

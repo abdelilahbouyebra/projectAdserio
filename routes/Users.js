@@ -205,7 +205,7 @@ users.get("/verifDateValidEmb",function(req,res){
 //count period d'essai
 users.get("/countPerEssai",function(req,res){
 
-    mysqlConn.query('select *  from candidats where (SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW()) as dateEmbouche)>=105', function (error, results, fields) {
+    mysqlConn.query('select *  from candidats where (SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW()) as dateEmbouche)>=105 and isPeriodEsaiValid=0', function (error, results, fields) {
         if (error) throw error;
         res.json(results);
     });
@@ -226,6 +226,22 @@ users.get("/dateEntrAnnuel",function(req,res){
         res.json(results);
     });
 })
-
+/* valider periode essai candidat*/
+users.put('/validerPeriodeEssai', (req, res) => {
+  var condition = { where :{id: req.body.id} }; 
+  options = { multi: true };
+  const candidatData = {
+    isPeriodEsaiValid:true,
+  }
+      if(req.body.id!=null){
+          Candidats.update(candidatData,condition,options)
+          .then(user => {
+            res.json(user)
+          })
+          .catch(err => {
+            res.send('error: ' + err)
+          })
+      } 
+    })
 
 module.exports = users

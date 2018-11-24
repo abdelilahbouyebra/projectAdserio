@@ -83,11 +83,12 @@
             </div>
         </div>
     </div>
-            <div class="col-lg-12 col-md-5"  [hidden]="!affichePerEssai">
-                <div class="card">
+            <div class="col-lg-12 col-md-5" [hidden]="!countPeriodEssai"  >
+                <div class="card" [hidden]="!affichePerEssai">
                         <div class="content">
                                     <div class="alert alert-success" role="alert" *ngFor="let c of countPeriodEssai" >
-                                            <div><b>Mr {{c.nom}} {{c.prenom}}!</b> Date d'ambouche est le {{c.dateEmbouche}}, la période d'esai sera terminer le {{c.dateEmbouche}}  . <span style="text-align: right;"><button class="btn btn-success rie">ok j'ai compris</button></span></div>
+                                            <div><b>Mr {{c.nom}} {{c.prenom}}!</b> Date d'ambouche est le {{c.dateEmbouche}}, la période d'esai sera terminer le {{c.dateEmbouche}} 
+                                                 . <span style="text-align: right;"><button (click)="validerPeriodeEssai(c)" class="btn btn-success rie">ok j'ai compris</button></span></div>
                                     </div>
                         </div>
                     </div>

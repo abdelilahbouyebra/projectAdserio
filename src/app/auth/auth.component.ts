@@ -35,7 +35,6 @@ export class AuthComponent implements OnInit {
   login() {
     this.loginService.login(this.credentials).subscribe(
       () => {
-        console.log("okkkkkkkkkkkkkkkkkkkkkkk");
         this.router.navigateByUrl('/candidats')
       },
       err => {

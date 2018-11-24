@@ -10,5 +10,6 @@ export class Candidat{
     entretienIndividuel:boolean;
     commentaire:String;
     calcDateEmb:Number;
+    isPeriodEsaiValid:boolean;
     
 }

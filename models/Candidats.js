@@ -41,7 +41,10 @@ module.exports = db.sequelize.define(
         },
      entretienIndividuel: {
        type: Sequelize.BOOLEAN
-     }
+     },
+     isPeriodEsaiValid: {
+      type: Sequelize.BOOLEAN
+    }
   },
   {
     timestamps: false
