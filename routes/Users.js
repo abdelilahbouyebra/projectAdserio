@@ -4,9 +4,11 @@ const cors = require('cors')
 const jwt = require('jsonwebtoken')
 var  mysql = require('mysql');
 
+var nodemailer = require('nodemailer');
 
 const User = require('../models/User')
 const Candidats = require('../models/Candidats')
+
 
 //Database connection
 var mysqlConn = mysql.createConnection({
@@ -205,7 +207,7 @@ users.get("/verifDateValidEmb",function(req,res){
 //count period d'essai
 users.get("/countPerEssai",function(req,res){
 
-    mysqlConn.query('select *  from candidats where (SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW()) as dateEmbouche)>=105 and isPeriodEsaiValid=0', function (error, results, fields) {
+    mysqlConn.query('select * ,(SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW())) as calcDay,((SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW())) - 105) as DffJour from candidats where (SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW()) as ss) and isPeriodEsaiValid=0', function (error, results, fields) {
         if (error) throw error;
         res.json(results);
     });
@@ -229,6 +231,10 @@ users.get("/dateEntrAnnuel",function(req,res){
 /* valider periode essai candidat*/
 users.put('/validerPeriodeEssai', (req, res) => {
   var condition = { where :{id: req.body.id} }; 
+  var nom = req.body.nom; 
+  var prenom = req.body.prenom; 
+  var dateEm = req.body.dateEmbouche; 
+  var postEc = req.body.postOcupe;
   options = { multi: true };
   const candidatData = {
     isPeriodEsaiValid:true,
@@ -236,6 +242,65 @@ users.put('/validerPeriodeEssai', (req, res) => {
       if(req.body.id!=null){
           Candidats.update(candidatData,condition,options)
           .then(user => {
+            ///////////envoi mail////////////////////
+            const output = `<html>
+            <head>
+              <style>
+                .colored {
+                  color: blue;
+                }
+                #body {
+                  font-size: 14px;
+                }
+              </style>
+            </head>
+            <body>
+            <div id='body'>
+            <p>Bonjour,</p>
+              <p class='colored'>Je vous informe que <b>`+nom+` `+prenom+ `</b> a été valider</p>
+              <p>Date d'ambouche: `+dateEm+`</p>
+              <p>Poste Occupé: `+postEc+`</p>
+              <p>Cordialement</p>
+            </div>
+          </body>
+        </html>
+          `;
+        
+           // create reusable transporter object using the default SMTP transport
+           let transporter = nodemailer.createTransport({
+            host: 'smtp.sendgrid.net',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: 'apikey', // generated ethereal user
+                pass: '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'  // generated ethereal password
+            },
+            tls:{
+              rejectUnauthorized:false
+            }
+          });
+        
+        
+          // setup email data with unicode symbols
+          let mailOptions = {
+              from: '"Appli Adservio" <your@email.com>', // sender address
+              to: 'abdelilah.bouyebra@gmail.com', // list of receivers
+              subject: 'Candidat validé', // Subject line
+              text: 'Hello world?', // plain text body
+              html: output // html body
+          };
+        
+          // send mail with defined transport object
+          transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                  return console.log(error);
+              }
+              console.log('Message sent: %s', info.messageId);   
+              console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+        
+              res.render('contact', {msg:'Email has been sent'});
+          });
+ ///////////fin mail////////////////////
             res.json(user)
           })
           .catch(err => {

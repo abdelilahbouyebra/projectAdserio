@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit{
                 return this.listTitles[item].title;
             }
         }
-        return 'Dashboard';
+        return 'Gestion des Candidats';
     }
     getVerifierDateEmbouche(){
         this.notificationService.getVerifierDateEmbouche()

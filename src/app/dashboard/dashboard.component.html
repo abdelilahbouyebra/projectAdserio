@@ -86,9 +86,14 @@
             <div class="col-lg-12 col-md-5" [hidden]="!countPeriodEssai"  >
                 <div class="card" [hidden]="!affichePerEssai">
                         <div class="content">
-                                    <div class="alert alert-success" role="alert" *ngFor="let c of countPeriodEssai" >
-                                            <div><b>Mr {{c.nom}} {{c.prenom}}!</b> Date d'ambouche est le {{c.dateEmbouche}}, la période d'esai sera terminer le {{c.dateEmbouche}} 
-                                                 . <span style="text-align: right;"><button (click)="validerPeriodeEssai(c)" class="btn btn-success rie">ok j'ai compris</button></span></div>
+                                    <div   *ngFor="let c of countPeriodEssai" >
+                                                <div class="alert alert-danger" role="alert" *ngIf="c.DffJour>0">La date de validation de M. <b>{{c.nom}} {{c.prenom}}</b> sera terminé bientôt, il reste <b>{{c.calcDay - 105}}</b> jours!
+                                                    <span style="text-align: right;"><button (click)="validerPeriodeEssai(c)" class="btn btn-danger rie">ok je valide</button></span>
+                                                </div>
+                                                <div class="alert alert-success" role="alert" *ngIf="c.DffJour <= 0">M. <b>{{c.nom}} {{c.prenom}}</b> a été valider pendant <b>{{105-c.calcDay}}</b> jours!
+                                                    <span style="text-align: right;"><button (click)="validerPeriodeEssai(c)" class="btn btn-success rie">ok j'ai compris</button></span>
+                                                </div>
+                                                
                                     </div>
                         </div>
                     </div>
@@ -104,7 +109,7 @@
                         <div class="content">
                                 <div class="alert alert-danger" role="alert" *ngFor="let c of countCartSej" >
                                         <h4 class="alert-heading">Mr {{c.nom}} {{c.prenom}}!</h4>
-                                        <p>Date d'ambouche le {{c.dateEmbouche}}, you successfully read this important alert message..</p>
+                                        <p>la Date de validiter du carte de séjour est ({{c.dateValidCrtSejour}}),attension sera terminé bientôt</p>
                                         <p class="mb-0"><button class="btn btn-danger rie">ok j'ai compris</button></p>
                                 </div>
                         </div>
