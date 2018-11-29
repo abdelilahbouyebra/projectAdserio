@@ -31,8 +31,8 @@ export class LoginService {
     private token: string
 
   
-  baseUrl:String="http://localhost:8081/users/";
-  constructor(private http: HttpClient,private router: Router) { 
+    baseUrl:String="http://145.14.158.40:8081/users/";
+    constructor(private http: HttpClient,private router: Router) { 
   	this.isUserLoggedIn = false;
   }
 

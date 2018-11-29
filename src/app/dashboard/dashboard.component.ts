@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit{
     this.notificationService.countValiditeCarteSejour()
          .subscribe( 
              res => {
+                 console.log("countCartSej "+res)
              this.countCartSej = res;
          }
          )
@@ -72,7 +73,7 @@ export class DashboardComponent implements OnInit{
         this.candidatService.validerPeriodeEssaiCandidat(candidat)
         .subscribe(data => {
             this.ngOnInit();
-          this.toastr.info('SUCCESS', "Candidat  est Modifié");
+          this.toastr.info('SUCCESS', candidat.nom+" est validé");
         })
 }
 

@@ -8,7 +8,17 @@ var nodemailer = require('nodemailer');
 
 const User = require('../models/User')
 const Candidats = require('../models/Candidats')
+var bodyParser = require('body-parser');
 
+users.use(bodyParser.urlencoded({ extended: true }))
+users.use(bodyParser.json({ type: 'application/*+json' }))
+users.use(bodyParser.json())
+users.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 //Database connection
 var mysqlConn = mysql.createConnection({
@@ -174,7 +184,7 @@ users.put('/modifEtatCandidat', (req, res) => {
   var condition = { where :{id: req.body.id} }; 
   options = { multi: true };
   const candidatData = {
-     dateEmbouche: req.body.dateEmbouche,
+    dateEntretienInd: req.body.dateEntretienInd,
      visiteMedical : req.body.visiteMedical,
      postOcupe :req.body.postOcupe,
      commentaire:req.body.commentaire,
@@ -207,7 +217,7 @@ users.get("/verifDateValidEmb",function(req,res){
 //count period d'essai
 users.get("/countPerEssai",function(req,res){
 
-    mysqlConn.query('select * ,(SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW())) as calcDay,((SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW())) - 105) as DffJour from candidats where (SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW()) as ss) and isPeriodEsaiValid=0', function (error, results, fields) {
+    mysqlConn.query('select * ,(SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW())) as calcDay,((SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW()))) as DffJour from candidats where (SELECT TIMESTAMPDIFF(DAY,dateEmbouche,NOW()) as ss) and isPeriodEsaiValid=0', function (error, results, fields) {
         if (error) throw error;
         res.json(results);
     });
@@ -215,7 +225,7 @@ users.get("/countPerEssai",function(req,res){
 //count carte sejour
 users.get("/countValCarteSej",function(req,res){
 
-    mysqlConn.query('select * from candidats where   (SELECT TIMESTAMPDIFF(DAY,NOW(),dateValidCrtSejour))>=60 and (SELECT TIMESTAMPDIFF(DAY,NOW(),dateValidCrtSejour))<=70', function (error, results, fields) {
+    mysqlConn.query('select *,(SELECT TIMESTAMPDIFF(DAY,NOW(),dateValidCrtSejour)) as calcDay,((SELECT TIMESTAMPDIFF(DAY,NOW(),dateValidCrtSejour))) as DffJour from candidats  ', function (error, results, fields) {
         if (error) throw error;
         res.json(results);
     });
@@ -257,10 +267,10 @@ users.put('/validerPeriodeEssai', (req, res) => {
             <body>
             <div id='body'>
             <p>Bonjour,</p>
-              <p class='colored'>Je vous informe que <b>`+nom+` `+prenom+ `</b> a été valider</p>
+              <p class='colored'>Je vous informe que M.<b>`+nom+` `+prenom+ `</b> est terminé son période d'essai</p>
               <p>Date d'ambouche: `+dateEm+`</p>
               <p>Poste Occupé: `+postEc+`</p>
-              <p>Cordialement</p>
+              <p>Cordialement.</p>
             </div>
           </body>
         </html>
@@ -268,23 +278,19 @@ users.put('/validerPeriodeEssai', (req, res) => {
         
            // create reusable transporter object using the default SMTP transport
            let transporter = nodemailer.createTransport({
-            host: 'smtp.sendgrid.net',
+            host: 'smtp.hostinger.fr',
             port: 587,
-            secure: false, // true for 465, false for other ports
             auth: {
-                user: 'apikey', // generated ethereal user
-                pass: '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'  // generated ethereal password
-            },
-            tls:{
-              rejectUnauthorized:false
+                user: 'ads@adserviolyon.tech', // generated ethereal user
+                pass: 'secret01'  // generated ethereal password
             }
           });
         
         
           // setup email data with unicode symbols
           let mailOptions = {
-              from: '"Appli Adservio" <your@email.com>', // sender address
-              to: 'abdelilah.bouyebra@gmail.com', // list of receivers
+              from: '"Message de test(Gestion des Candidats)" <ads@adserviolyon.tech>', // sender address
+              to: 'abdelilah.bouyebra@gmail.com,mounia.abed@adservio.fr,alexandra.blanc@adservio.fr,medali.souissi@adservio.fr', // list of receivers
               subject: 'Candidat validé', // Subject line
               text: 'Hello world?', // plain text body
               html: output // html body

@@ -88,7 +88,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Date d'enbauche</label>
+                                        <label>Date d'embauche</label>
                                         <input class="form-control border-input text-uppercase " type="date" name="dateEmbouche" autocomplete="off"  #dateEmbouche="ngModel" [(ngModel)]="selectedCandidat.dateEmbouche"
                                         placeholder="prenom" required>
                                       <div class="alert alert-danger" *ngIf="dateEmbouche.invalid && dateEmbouche.touched">date d'embouche est obligatoire</div>
@@ -109,7 +109,7 @@
                                     <div class="form-group">
                                         <label>Poste occupé</label>
                                         <input class="form-control border-input text-uppercase" type="text" autocomplete="off"  name="postOcupe" #postOcupe="ngModel" [(ngModel)]="selectedCandidat.postOcupe"
-                                        placeholder="prenom" required>
+                                        placeholder="poste occupe" required>
                                       <div class="alert alert-danger" *ngIf="postOcupe.invalid && postOcupe.touched">le champ post occupé est obligatoire</div>
                                     </div>
                                 </div>

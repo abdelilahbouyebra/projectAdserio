@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" *ngIf="auth.isLoggedIn()">
+<nav class="navbar navbar-default" >
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" (click)="sidebarToggle()">
@@ -9,7 +9,7 @@
                 </button>
                 <a class="navbar-brand" href="#">{{getTitle()}}</a>
             </div>
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" *ngIf="auth.isLoggedIn()">
                 <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a   class="dropdown-toggle" data-toggle="dropdown"><!--  routerLink="/profile"  -->

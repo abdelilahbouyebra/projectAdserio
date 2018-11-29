@@ -42,7 +42,7 @@ export class ConsultComponent implements OnInit{
    
     ngOnInit(){
         this.resetForm();
-        this.dataTableCandidat={headerRow: ['NOM','PRENOM','VISITE MEDICAL','PERIODE D\'ESSAI']};
+        this.dataTableCandidat={headerRow: ['nom et pr','v.m','etat','actions']};
         this.getAllCandidat();
     }
     resetForm(form?: NgForm) {

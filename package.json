@@ -30,7 +30,7 @@
     "chartist": "0.9.4",
     "core-js": "^2.4.1",
     "cors": "^2.8.5",
-    "express": "4.15.3",
+    "express": "^4.15.3",
     "jquery": "1.12.4",
     "jsonwebtoken": "^8.4.0",
     "maildev": "^1.0.0-rc3",

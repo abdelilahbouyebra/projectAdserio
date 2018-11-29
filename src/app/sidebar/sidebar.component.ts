@@ -33,5 +33,10 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
-   
+    isNotMobileMenu(){
+        if($(window).width() > 991){
+            return false;
+        }
+        return true;
+    }
 }
