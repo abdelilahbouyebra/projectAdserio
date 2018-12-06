@@ -78,17 +78,17 @@
                                     <div   *ngFor="let c of countPeriodEssai| paginate: {itemsPerPage: 5, currentPage: p}" >
 
                                             <ng-container *ngIf="c.DffJour<=0 || c.DffJour>=120;else second">
-                                                    <div class="alert alert-success" role="alert" >M. <b>{{c.nom}} {{c.prenom}}</b> a été validé , date d'embauche est <b>({{c.dateEmbouche}})</b>
+                                                    <div class="alert alert-success" role="alert" > la période d'essai de M.<b>{{c.nom}} {{c.prenom}} </b> est terminé, date d'embauche est <b>({{c.dateEmbouche}})</b>
                                                         &nbsp;&nbsp;&nbsp;<span><button (click)="validerPeriodeEssai(c)" class="btn btn-success rie">valider</button></span>
                                                     </div>
                                             </ng-container>
                                             <ng-template #second>
                                                 <ng-container *ngIf="120 - c.DffJour<=15 ;else third">
-                                                    <div class="alert alert-danger" role="alert" >La date de validation de M. <b>{{c.nom}} {{c.prenom}}</b> sera terminée bientôt, il reste <b>({{120-c.calcDay}})</b> jours!</div>
+                                                    <div class="alert alert-danger" role="alert" >La date de validation de M. <b>{{c.nom}} {{c.prenom}}</b> se termine dans <b>({{120-c.calcDay}})</b> jours!</div>
                                                 </ng-container>
                                             </ng-template>
                                             <ng-template  #third>
-                                                    <div class="alert alert-info" role="alert" >il reste ({{120-c.calcDay}}) jours pour la période d'essai de M.<b>{{c.nom}} {{c.prenom}}</b></div>
+                                                    <div class="alert alert-info" role="alert" >la période d'essai de M.<b>{{c.nom}} {{c.prenom}} se termine dans ({{120-c.calcDay}}) jours</b></div>
                                             </ng-template>  
                                                 
                                     </div>
@@ -108,11 +108,11 @@
                                     </ng-container>
                                     <ng-template #second>
                                         <ng-container *ngIf="c.DffJour <=60;else third">
-                                            <div class="alert alert-warning" role="alert" >La date de validation de Carte de Séjour de <b>{{c.nom}} {{c.prenom}}</b> sera terminée bientôt, il reste <b>{{c.calcDay}}</b> jours!</div>
+                                            <div class="alert alert-warning" role="alert" >La date de validation de Carte de Séjour de <b>{{c.nom}} {{c.prenom}}</b> se termine dans  <b>{{c.calcDay}}</b> jours!</div>
                                         </ng-container>
                                     </ng-template>
                                     <ng-template #third>
-                                            <div class="alert alert-info" role="alert" > La date de validation de Carte de Séjour de <b>{{c.nom}} {{c.prenom}} , il reste <b>{{c.calcDay}}</b> jours!</b></div>
+                                            <div class="alert alert-info" role="alert" > La date de validation de Carte de Séjour de <b>{{c.nom}} {{c.prenom}} , se termine dans <b>{{c.calcDay}}</b> jours!</b></div>
                                     </ng-template>  
                             </div>
                     </div>

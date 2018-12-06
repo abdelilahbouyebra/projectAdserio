@@ -17,7 +17,7 @@ export const AppRoutes: Routes = [
     {
         path: 'login',
         component: AuthComponent
-    },
+        },
     {
         path: 'acceuil',
         component: DashboardComponent,
@@ -42,5 +42,9 @@ export const AppRoutes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         canActivate: [AuthGuard]
-    }
+    },
+    { path: '**', 
+         component: DashboardComponent,
+         canActivate: [AuthGuard]
+     }
 ]

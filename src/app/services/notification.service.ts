@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
 @Injectable()
 export class NotificationService {
 
-    baseUrl:String="http://145.14.158.40:8081/users/";
+    baseUrl:String="http://localhost:8081/users/";
     users:Candidat[]=[];
 
   constructor(private http:Http) { }

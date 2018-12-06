@@ -31,7 +31,7 @@ export class LoginService {
     private token: string
 
   
-    baseUrl:String="http://145.14.158.40:8081/users/";
+    baseUrl:String="http://localhost:8081/users/";
     constructor(private http: HttpClient,private router: Router) { 
   	this.isUserLoggedIn = false;
   }
@@ -81,7 +81,7 @@ export class LoginService {
   public isLoggedIn(): boolean {
     const user = this.getUserDetails()
     if (user) {
-      return user.exp > Date.now() / 10000
+      return user.exp > Date.now() / 1000
     } else {
       return false
     }

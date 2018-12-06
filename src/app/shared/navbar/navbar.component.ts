@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit{
     constructor(location:Location, private renderer : Renderer, 
         private element : ElementRef,
         private notificationService:NotificationService,
-        private auth:LoginService) {
+        public auth:LoginService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;

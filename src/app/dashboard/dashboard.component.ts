@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit{
     private candidatService:CandidatService,
     private toastr:ToastrService
     ){}
+    p: number;
   countPeriodEssai:any;
   countCartSej:any;
   countEntAnnuel:any;

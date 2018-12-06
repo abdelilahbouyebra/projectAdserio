@@ -36,7 +36,7 @@ export class ConsultComponent implements OnInit{
     listCandidat:Candidat[];
     selectedConsultCandidat : Candidat;
     show:boolean = false;
-
+     p:number;
     constructor(private candidatService:CandidatService,private toastr:ToastrService){}
 
    

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService,TokenPayload } from 'app/services/login.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-auth',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private router:Router,private loginService:LoginService) { }
+  constructor(private router:Router,private loginService:LoginService,private toastr:ToastrService) { }
   credentials: TokenPayload;
   
   ngOnInit() {
@@ -21,23 +23,14 @@ export class AuthComponent implements OnInit {
       password: ''
     }
   }
-  loginUser(e) {
-  	e.preventDefault();
-  	
-  	var username = e.target.elements[0].value;
-    var password = e.target.elements[1].value;
-  	
-  	if(username == 'admin' && password == 'admin') {
-      this.loginService.setUserLoggedIn();
-  		this.router.navigate(['acceuil']);
-  	}
-  }
+
   login() {
     this.loginService.login(this.credentials).subscribe(
       () => {
-        this.router.navigateByUrl('/candidats')
+        this.router.navigateByUrl('/acceuil')
       },
       err => {
+        this.toastr.info('ERREUR', "Login ou le mot de passe est incorrete");
         console.error(err)
       }
     )

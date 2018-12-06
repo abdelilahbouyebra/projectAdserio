@@ -20,7 +20,7 @@ export class UserComponent implements OnInit{
     candidat:Candidat[]=[];
     selectedCandidat : Candidat;
     listCandidtatVerifDatEmb:Candidat[];
-
+  p:number;
 
     fileToUpload: File = null;
     imageUrl: string = "";

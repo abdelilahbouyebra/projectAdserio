@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
 @Injectable()
 export class UserService {
 
-  baseUrl:String="http://145.14.158.40:8081/users/";
+  baseUrl:String="http://localhost:8081/users/";
   usersList:Candidat[];
   users:Candidat[]=[];
 
@@ -58,7 +58,6 @@ modifierEtatCandidat(id, user) {
   var body = JSON.stringify(user);
   var headerOptions = new Headers({ 'Content-Type': 'application/json' });
   var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
-  console.log(body);
   return this.http.put(this.baseUrl+"modifEtatCandidat/" + id,
   body,
   requestOptions).map(res => res.json());
